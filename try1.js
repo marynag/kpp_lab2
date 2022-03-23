@@ -1,18 +1,7 @@
-console.log('hello word');
-
-var readline = require('readline');  
-var rl = readline.createInterface(process.stdin, process.stdout);
-
-/*  
-     rl.question('What is your age? ', (age) => {
-        console.log('Your age is: ' + age);
-        rl.close();
-    });
-*/
+var readlineSync = require('readline-sync');
 
 var counter=0;
 
-//генерація числа 0-9
 
 function randomNumber(){             
     var number= Math.floor(Math.random()*10);
@@ -49,36 +38,23 @@ function verifyEntry(number){
 }
 
 
+rnd = computerNumber();
 
-function check(){  
-	
-	//var userNumber='1234';
+function check(){  	
 
-	// з файлу 	
+	userNumber = readlineSync.question('Enter number: ');
 
-	const fs = require('fs')
-
-	userNumber = fs.readFileSync("work_please.txt", "utf8");
-
-
-	//---------------------------------------------
-    rl.question('Enter number \r\n', ( userNumber) => {
-        console.log('Your number: ' + userNumber);
-        rl.close();
-		return userNumber;
-    });	
-	//----------------------------------------------------
-	
-	
-	console.log('юзернамбер '+ userNumber);
 	var cows=0;
 	var bulls=0;
+
 	if (verifyEntry(userNumber)===false){
 		console.log(userNumber+" - Неправильні дані\r\n");
 	} 
-	else {
-		for (var n=0; n<4; n++){
-			for (var i=0; i<4; i++){
+	else{
+
+	
+		for (let n=0; n<4; n++){
+			for (let i=0; i<4; i++){
 				if (userNumber.charAt(i) === rnd.charAt(n) && i==n){
 					bulls++;
 				}
@@ -92,15 +68,16 @@ function check(){
 		counter++;
 		if (bulls===4){
 			console.log("___________________________________________________________ \r\n"+userNumber+" - Загадане число"+" \r\n"+ "Ви виграли, кількість спроб: "+counter+" \r\n");
-			rnd=computerNumber();
+
 			counter=0;
     	}
 		else{
         	console.log(userNumber+ " - " + cows +" корів, "+ bulls +" биків, спроб: "+counter+"\r\n");}
-    	}
 	}
+};
 
+var goal = check();
 
-
-	rnd = computerNumber();
+for(let r=0; rnd != userNumber;r++ ){
 	var goal = check();
+}
