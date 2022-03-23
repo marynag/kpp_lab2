@@ -2,7 +2,6 @@ var readlineSync = require('readline-sync');
 
 var counter=0;
 
-
 function randomNumber(){             
     var number= Math.floor(Math.random()*10);
     return number
@@ -22,7 +21,6 @@ function computerNumber(){
     console.log("Загадане число "+rnd);
     return rnd;
 }
-
 
 
 function verifyEntry(number){
@@ -75,6 +73,8 @@ function check(){
         	console.log(userNumber+ " - " + cows +" корів, "+ bulls +" биків, спроб: "+counter+"\r\n");}
 	}
 };
+
+
 
 var goal = check();
 
