@@ -6,7 +6,17 @@ var screen = blessed.screen({
 	smartCSR: true,
   });
 
+/*
+  var color_num_first = genetateColor();
+  var color_num_second = genetateColor();
+  var color_num_third = genetateColor();
+  var color_num_fourth = genetateColor();*/
 
+  var color_num_first = 1;
+  var color_num_second = 0;
+  var color_num_third = 2;
+  var color_num_fourth = 3;
+  
   var box = blessed.box({
 	top: 'left',
 	left: 'right',
@@ -103,7 +113,7 @@ var A=[box,box2,box3,box4];
   screen.append(A[1]);
   screen.append(A[2]);
   screen.append(A[3]);
-
+/*
   var icon = blessed.image({
 	parent: box,
 	top: 0,
@@ -113,7 +123,7 @@ var A=[box,box2,box3,box4];
 	height: 'shrink',
 	file: __dirname + '/my-program-icon.png',
 	search: false
-  }); 
+  }); */
   
 
   screen.key(['escape', 'C-c'], function(ch, key) {
@@ -128,17 +138,14 @@ var A=[box,box2,box3,box4];
 }
 
 
-var color_num_first = genetateColor();
-var color_num_second = genetateColor();
-var color_num_third = genetateColor();
-var color_num_fourth = genetateColor();
+
 
 var Colors=['blue','green','red','yellow','magenta','cyan'];
 //B=['15%','15%','30%','45%']
 
 		screen.key('w', function(ch, key) {
 		screen.free(A[0]);
-		var color_num_first = genetateColor();
+		color_num_first = genetateColor();
 		  A[0]= blessed.box({
 			  top: 'left',
 			  left: 'right',
@@ -161,12 +168,13 @@ var Colors=['blue','green','red','yellow','magenta','cyan'];
 			  }
 			});
 			screen.append(A[0]);
-			screen.render();		  
+			screen.render();
+		return color_num_first;		  
 	});
 
 	screen.key('e', function(ch, key) {
 		screen.free(A[1]);
-		var color_num_second = genetateColor();
+		color_num_second = genetateColor();
 		  A[1]= blessed.box({
 			  top: 'left',
 			  left: '15%',
@@ -189,12 +197,13 @@ var Colors=['blue','green','red','yellow','magenta','cyan'];
 			  }
 			});
 			screen.append(A[1]);
-			screen.render();		  
+			screen.render();	
+		return color_num_second;	  
 	});
 
 	screen.key('r', function(ch, key) {
 		screen.free(A[2]);
-		var color_num_third = genetateColor();
+		color_num_third = genetateColor();
 		  A[2]= blessed.box({
 			  top: 'left',
 			  left: '30%',
@@ -217,12 +226,13 @@ var Colors=['blue','green','red','yellow','magenta','cyan'];
 			  }
 			});
 			screen.append(A[2]);
-			screen.render();		  
+			screen.render();	
+		return color_num_third;	  
 	});
 
 	screen.key('t', function(ch, key) {
 		screen.free(A[3]);
-		var color_num_fourth = genetateColor();
+		color_num_fourth = genetateColor();
 		  A[3]= blessed.box({
 			  top: 'left',
 			  left: '45%',
@@ -246,7 +256,8 @@ var Colors=['blue','green','red','yellow','magenta','cyan'];
 			  }
 			});
 			screen.append(A[3]);
-			screen.render();		  
+			screen.render();	
+		return color_num_fourth;	  
 	});
 
 
