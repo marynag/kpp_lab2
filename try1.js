@@ -1,147 +1,59 @@
 var readlineSync = require('readline-sync');
 var blessed = require('blessed');
 
-// перемістила зміні з генерацієї кольорів
 var screen = blessed.screen({
 	smartCSR: true,
   });
 
-/*
-  var color_num_first = genetateColor();
-  var color_num_second = genetateColor();
-  var color_num_third = genetateColor();
-  var color_num_fourth = genetateColor();*/
-
-  var color_num_first = 1;
+  var color_num_first = 0;
   var color_num_second = 0;
-  var color_num_third = 2;
-  var color_num_fourth = 3;
+  var color_num_third = 0;
+  var color_num_fourth = 0;
   
-  var box = blessed.box({
-	top: 'left',
-	left: 'right',
-	width: '15%',
-	height: '30%',
-	border: {
-	  type: 'line'
-	},
-	style: {
-	  fg: 'white',
-	  bg: 'green',
-	  border: {
-		fg: 'white'
-	  },
-	  focus: {
-		border: {
-		  fg: 'blue'
-		}
-	  }
-	}
-  });
-  
+  var Colors=['blue','green','red','yellow','magenta','cyan'];
 
-  var box2 = blessed.box({
-	top: 'left',
-	left: '15%',
-	width: '15%',
-	height: '30%',
-	border: {
-	  type: 'line'
-	},
-	style: {
-	  fg: 'white',
-	  bg: 'blue',
-	  border: {
-		fg: 'white'
-	  },
-	  focus: {
-		border: {
-		  fg: 'blue'
-		}
-	  }
-	}
-  });
+  B=['right','15%','30%','45%'];
 
-  var box3 = blessed.box({
-	top: 'left',
-	left: '30%',
-	width: '15%',
-	height: '30%',
-	border: {
-	  type: 'line'
-	},
-	style: {
-	  fg: 'white',
-	  bg: 'red',
-	  border: {
-		fg: 'white'
-	  },
-	  focus: {
-		border: {
-		  fg: 'blue'
-		}
-	  }
-	}
-  });
+A=[];
 
-  var box4 = blessed.box({
-	top: 'left',
-	left: '45%',
-	width: '15%',
-	height: '30%',
-	border: {
-	  type: 'line'
-	},
-	style: {
-	  fg: 'white',
-	  bg: 'yellow',
-	  border: {
-		fg: 'white'
-	  },
-	  focus: {
+  for (var i=0; i<=4;i++){
+	var box = blessed.box({
+		top: 'right',
+		left: B[i],
+		width: '15%',
+		height: '30%',
 		border: {
-		  fg: 'blue'
+		  type: 'line'
+		},
+		style: {
+		  fg: 'white',
+		  bg: 'blue',
+		  border: {
+			fg: 'white'
+		  },
+		  focus: {
+			border: {
+			  fg: 'blue'
+			}
+		  }
 		}
-	  }
-	}
-  });
-  
-var A=[box,box2,box3,box4];
+	  });
+	A.push(box);	
+  }
 
- 
   screen.append(A[0]);
   screen.append(A[1]);
   screen.append(A[2]);
   screen.append(A[3]);
-/*
-  var icon = blessed.image({
-	parent: box,
-	top: 0,
-	left: 0,
-	type: 'overlay',
-	width: 'shrink',
-	height: 'shrink',
-	file: __dirname + '/my-program-icon.png',
-	search: false
-  }); */
-  
 
   screen.key(['escape', 'C-c'], function(ch, key) {
 	return process.exit(0);
   });
 
-  function genetateColor(){
-	//var Colors=['blue','green','red','yellow','magenta','cyan'];
+  function genetateColor(){	
 	var color = (Math.floor(Math.random()*6));
-	//color= Colors[color_number];
 	return color;
 }
-
-
-
-
-var Colors=['blue','green','red','yellow','magenta','cyan'];
-//B=['15%','15%','30%','45%']
 
 		screen.key('w', function(ch, key) {
 		screen.free(A[0]);
@@ -260,48 +172,39 @@ var Colors=['blue','green','red','yellow','magenta','cyan'];
 		return color_num_fourth;	  
 	});
 
-
+//-------------------------------------------------------------------
 	for (var i=0; i<4; i++){
 		A[i].key(["d"], function (ch, key) {
 			screen.focusNext();
 		  });
+
+	
 	};	
 
 screen.render();
 
+// GAME
 
-screen.key(["h"], function (ch, key) {
+screen.key('enter', function (ch, key) {
 
 
 console.log(" \r\n");
 
 var counter=0;
 
-/*
-
-var color_num_first = genetateColor();
-var color_num_second = genetateColor();
-var color_num_third = genetateColor();
-var color_num_fourth = genetateColor();*/
 
 rnd=color_num_first.toString()+color_num_second.toString()+color_num_third+color_num_fourth.toString();
 
+//console.log("Загадане число "+rnd);
 
-console.log("Загадане число "+rnd);
-
-
-function verifyEntry(number){
-	number=number.toString();
+function verifyEntry(number){	
 	verif=true;
-	for (var i=0;i<4;i++){
-		if (number.lastIndexOf(number.charAt(i))!=i){
-			verif=false;
-			break;
-		}
+	number=number.toString();	
+	if (number.length!=4){
+		verif=false;
 	}
 	return verif;
 }
-
 
 function check(){  	
 
@@ -314,7 +217,6 @@ function check(){
 		console.log(userNumber+" - Неправильні дані\r\n");
 	} 
 	else{
-
 	
 		for (let n=0; n<4; n++){
 			for (let i=0; i<4; i++){
@@ -330,7 +232,7 @@ function check(){
 		}
 		counter++;
 		if (bulls===4){
-			console.log("___________________________________________________________ \r\n"+userNumber+" - Загадане число"+" \r\n"+ "Ви виграли, кількість спроб: "+counter+" \r\n");
+			console.log(userNumber+" - Загадане число"+" \r\n"+ "Ви виграли, кількість спроб: "+counter+" \r\n");
 
 			counter=0;
     	}
@@ -342,6 +244,7 @@ function check(){
 var goal = check();
 
 for(let r=0; rnd != userNumber;r++ ){
-	var goal = check();
-}
+		var goal = check();
+	}
+
 });
