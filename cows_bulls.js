@@ -94,11 +94,14 @@ function computerNumber(){
 
 
 
-function verifyEntry(number){	
+function verifyEntry(number){
+	number=number.toString();
 	verif=true;
-	number=number.toString();	
-	if (number.length!=4){
-		verif=false;
+	for (var i=0;i<4;i++){
+		if (number.lastIndexOf(number.charAt(i))!=i){
+			verif=false;
+			break;
+		}
 	}
 	return verif;
 }
@@ -106,7 +109,6 @@ function verifyEntry(number){
 
 rnd = computerNumber();
 
-rnd='3341'
 function check(){  	
 
 	userNumber = readlineSync.question('Enter number: ');

@@ -28,14 +28,7 @@ var A=[];
 		style: {
 		  fg: 'white',
 		  bg: 'blue',
-		  border: {
-			fg: 'white'
-		  },
-		  focus: {
-			border: {
-			  fg: 'blue'
-			}
-		  }
+		  
 		}
 	  });
 	A.push(box);	
@@ -172,13 +165,6 @@ var A=[];
 		return color_num_fourth;	  
 	});
 
-
-	for (var i=0; i<4; i++){
-		A[i].key(["d"], function (ch, key) {
-			screen.focusNext();
-		  });
-
-	};	
 
 screen.render();
 
