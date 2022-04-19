@@ -248,4 +248,3 @@ screen.key('enter', function (ch, key) {
 	}
 
 });
-
