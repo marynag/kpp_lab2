@@ -124,6 +124,42 @@ function disp_color(){
 
 screen.render();
 
+var user_choice_i=[];
+var user_choice=[];
+
+function display_user_choice(){
+	var display_top=['40%','50%','60%','70%'];
+	var display_user_location=['0%','5%','10%','15%','25%','30%','35%','40%','50%','55%','60%','65%'];	
+	var user_color=[color_num_first,color_num_second,color_num_third,color_num_fourth];	
+	for (var j=0; j<=3;j++){
+		for (var i=0; i<=11;i++){
+			var box = blessed.box({
+			/*top: 5,
+			top: '40%',*/
+			top: display_top[j],
+			left: display_user_location[i],
+			width: '3%',
+			height: '20%',		
+			style: {
+			fg: 'white',
+			bg: 'red',
+			/*bg: Colors[user_color[i]],*/ 
+			}
+			});
+			user_choice.push(box);
+			screen.append(user_choice[i]);
+		}	/*
+		user_choice_i.push(user_choice);
+		screen.append(user_choice_i[j]);*/
+	}
+	  
+	
+	
+	screen.render();
+};
+	  
+
+
 
 
 // GAME
@@ -143,29 +179,25 @@ function computerNumber(){
         {break}
     }
     var rnd=fourth.toString()+third.toString()+second.toString()+first.toString();
-	console.log(" \r\n");	
     return rnd;
 }
-
 
 rnd = computerNumber();
 
 var cc=0;
 
+
 screen.key('enter', function (ch, key) {
 	
 
 	if (color_num_first!=color_num_second && color_num_first!=color_num_third && color_num_first!=color_num_fourth && color_num_second!=color_num_third && color_num_second!=color_num_fourth && color_num_third!=color_num_fourth){
-
-		console.log(" \r\n");
-		
-		var counter=0;		
-
-				
-
+					
+		var counter=0;
+		console.log(" \r\n");	
 		function check(){  	
 
 			userNumber=color_num_first.toString()+color_num_second.toString()+color_num_third+color_num_fourth.toString();
+			console.log("Загадане число "+rnd);
 
 			var cows=0;
 			var bulls=0;
@@ -187,13 +219,13 @@ screen.key('enter', function (ch, key) {
 			counter++;
 			if (bulls===4){
 				console.log(userNumber+" - Загадане число"+" \r\n"+ "Ви виграли!!!"+" \r\n");
-				
-
 				counter=0;
     		}
 			else{
-        		console.log(userNumber+ " - " + cows +" корів, "+ bulls +" биків"+"\r\n");
+				console.log(" \r\n");
 				
+        		console.log(userNumber+ " - " + cows +" корів, "+ bulls +" биків"+"\r\n");
+				display_user_choice();
 			}
 		};
 		
@@ -205,31 +237,5 @@ screen.key('enter', function (ch, key) {
 	
 });
 
+
 disp_color();
-
-
-var box66 = blessed.box({
-	top: 'center',
-	left: 'center',
-	width: '15%',
-	height: '30%',
-	content: "Загадане число "+rnd,
-	tags: true,
-	border: {
-	  type: 'line'
-	},
-	style: {
-	  fg: 'white',
-	  bg: 'black',
-	  border: {
-		fg: '#f0f0f0'
-	  },
-	  hover: {
-		bg: 'green'
-	  }
-	}
-  });
-
-  screen.append(box66);
-
-  screen.render();
